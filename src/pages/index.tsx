@@ -7,19 +7,26 @@ import {
   PlusCircleFilled,
   QuestionCircleFilled,
   SearchOutlined,
-} from '@ant-design/icons';
-import type { ProSettings } from '@ant-design/pro-components';
+} from "@ant-design/icons";
+import type { ProSettings } from "@ant-design/pro-components";
 import {
   PageContainer,
   ProCard,
   ProConfigProvider,
   ProLayout,
   SettingDrawer,
-} from '@ant-design/pro-components';
-import { css } from '@emotion/css';
-import { Button, Divider, Input, Dropdown, Popover, theme } from 'antd';
-import React, { useState } from 'react';
-import defaultProps from './_defaultProps';
+} from "@ant-design/pro-components";
+import { css } from "@emotion/css";
+import {
+  Button,
+  Divider,
+  Input,
+  Dropdown,
+  Popover,
+  theme,
+} from "antd";
+import React, { useEffect, useState } from "react";
+import defaultProps from "./_defaultProps";
 
 const Item: React.FC<{ children: React.ReactNode }> = (props) => {
   const { token } = theme.useToken();
@@ -36,7 +43,7 @@ const Item: React.FC<{ children: React.ReactNode }> = (props) => {
         }
       `}
       style={{
-        width: '33.33%',
+        width: "33.33%",
       }}
     >
       {props.children}
@@ -49,13 +56,16 @@ const Item: React.FC<{ children: React.ReactNode }> = (props) => {
   );
 };
 
-const List: React.FC<{ title: string; style?: React.CSSProperties }> = (props) => {
+const List: React.FC<{
+  title: string;
+  style?: React.CSSProperties;
+}> = (props) => {
   const { token } = theme.useToken();
 
   return (
     <div
       style={{
-        width: '100%',
+        width: "100%",
         ...props.style,
       }}
     >
@@ -63,7 +73,7 @@ const List: React.FC<{ title: string; style?: React.CSSProperties }> = (props) =
         style={{
           fontSize: 16,
           color: token.colorTextHeading,
-          lineHeight: '24px',
+          lineHeight: "24px",
           fontWeight: 500,
           marginBlockEnd: 16,
         }}
@@ -72,8 +82,8 @@ const List: React.FC<{ title: string; style?: React.CSSProperties }> = (props) =
       </div>
       <div
         style={{
-          display: 'flex',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexWrap: "wrap",
         }}
       >
         {new Array(6).fill(1).map((_, index) => {
@@ -89,27 +99,27 @@ const MenuCard = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
       }}
     >
       <Divider
         style={{
-          height: '1.5em',
+          height: "1.5em",
         }}
         type="vertical"
       />
       <Popover
         placement="bottom"
         overlayStyle={{
-          width: 'calc(100vw - 24px)',
-          padding: '24px',
+          width: "calc(100vw - 24px)",
+          padding: "24px",
           paddingTop: 8,
-          height: '307px',
-          borderRadius: '0 0 6px 6px',
+          height: "307px",
+          borderRadius: "0 0 6px 6px",
         }}
         content={
-          <div style={{ display: 'flex', padding: '32px 40px' }}>
+          <div style={{ display: "flex", padding: "32px 40px" }}>
             <div style={{ flex: 1 }}>
               <List title="金融解决方案" />
               <List
@@ -122,8 +132,8 @@ const MenuCard = () => {
 
             <div
               style={{
-                width: '308px',
-                borderInlineStart: '1px solid ' + token.colorBorder,
+                width: "308px",
+                borderInlineStart: "1px solid " + token.colorBorder,
                 paddingInlineStart: 16,
               }}
             >
@@ -187,12 +197,12 @@ const MenuCard = () => {
           style={{
             color: token.colorTextHeading,
             fontWeight: 500,
-            cursor: 'pointer',
-            display: 'flex',
+            cursor: "pointer",
+            display: "flex",
             gap: 4,
             paddingInlineStart: 8,
             paddingInlineEnd: 12,
-            alignItems: 'center',
+            alignItems: "center",
           }}
           className={css`
             &:hover {
@@ -215,8 +225,8 @@ const SearchInput = () => {
       key="SearchOutlined"
       aria-hidden
       style={{
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         marginInlineEnd: 24,
       }}
       onMouseDown={(e) => {
@@ -250,20 +260,33 @@ const SearchInput = () => {
   );
 };
 
-const Index = () => {
-  const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
+
+const Index = ():JSX.Element => {
+  const [settings, setSetting] = useState<
+    Partial<ProSettings> | undefined
+  >({
     fixSiderbar: true,
-    layout: 'mix',
+    layout: "mix",
     splitMenus: true,
   });
 
-  const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
+  const [pathname, setPathname] = useState(
+    "/list/sub-page/sub-sub-page1"
+  );
   const [num, setNum] = useState(40);
+
+    // Cirelly
+    // Similar a componentDidMount y componentDidUpdate
+    useEffect(() => {
+      // Actualiza el titulo del documento
+      document.title = `documento cargado!`;
+    });
+  
   return (
     <div
       id="test-pro-layout"
       style={{
-        height: '100vh',
+        height: "100vh",
       }}
     >
       <ProConfigProvider hashed={false}>
@@ -271,22 +294,22 @@ const Index = () => {
           prefixCls="my-prefix"
           bgLayoutImgList={[
             {
-              src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
+              src: "https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png",
               left: 85,
               bottom: 100,
-              height: '303px',
+              height: "303px",
             },
             {
-              src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
+              src: "https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png",
               bottom: -68,
               right: -45,
-              height: '303px',
+              height: "303px",
             },
             {
-              src: 'https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png',
+              src: "https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png",
               bottom: 0,
               left: 0,
-              width: '331px',
+              width: "331px",
             },
           ]}
           {...defaultProps}
@@ -298,18 +321,18 @@ const Index = () => {
             collapsedShowGroupTitle: true,
           }}
           avatarProps={{
-            src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-            size: 'small',
-            title: '七妮妮',
+            src: "https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg",
+            size: "small",
+            title: "七妮妮",
             render: (props, dom) => {
               return (
                 <Dropdown
                   menu={{
                     items: [
                       {
-                        key: 'logout',
+                        key: "logout",
                         icon: <LogoutOutlined />,
-                        label: '退出登录',
+                        label: "退出登录",
                       },
                     ],
                   }}
@@ -322,7 +345,8 @@ const Index = () => {
           actionsRender={(props) => {
             if (props.isMobile) return [];
             return [
-              props.layout !== 'side' && document.body.clientWidth > 1400 ? (
+              props.layout !== "side" &&
+              document.body.clientWidth > 1400 ? (
                 <SearchInput />
               ) : undefined,
               <InfoCircleFilled key="InfoCircleFilled" />,
@@ -353,7 +377,7 @@ const Index = () => {
             return (
               <div
                 style={{
-                  textAlign: 'center',
+                  textAlign: "center",
                   paddingBlockStart: 12,
                 }}
               >
@@ -366,7 +390,7 @@ const Index = () => {
           menuItemRender={(item, dom) => (
             <div
               onClick={() => {
-                setPathname(item.path || '/welcome');
+                setPathname(item.path || "/welcome");
               }}
             >
               {dom}
@@ -401,7 +425,7 @@ const Index = () => {
           >
             <ProCard
               style={{
-                height: '200vh',
+                height: "200vh",
                 minHeight: 800,
               }}
             >
@@ -412,7 +436,9 @@ const Index = () => {
           <SettingDrawer
             pathname={pathname}
             enableDarkTheme
-            getContainer={() => document.getElementById('test-pro-layout')}
+            getContainer={() =>
+              document.getElementById("test-pro-layout")
+            }
             settings={settings}
             onSettingChange={(changeSetting) => {
               setSetting(changeSetting);
