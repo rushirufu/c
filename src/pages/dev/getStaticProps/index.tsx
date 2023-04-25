@@ -1,7 +1,7 @@
 import useFetch from "@/hooks/usehooks-ts";
 import Image from 'next/image'
 import { GetStaticProps, NextPage } from "next";
-import pokeApi from "../api/Pokemons";
+import pokeApi from "../../api/Pokemons";
 import { PokemonSmall, PokemonsListResponse } from "@/interfaces/pokemon-list";
 
 interface Props {
@@ -26,25 +26,6 @@ const index: NextPage<Props> = ({ pokemons }) => {
         ))
       }
     </ul>
-    {/* <Image
-      src={pokemons[0].url}
-      alt="Vercel Logo"
-      width={100}
-      height={100}
-      priority
-    /> */}
-    {/* <img src={pokemons[0].url} name={pokemons[0].name} /> */}
-
-      <ul>
-      </ul>
-      {/* <h1>Hola {pokemons[0].name}</h1> */}
-      <ul>
-      {/* {
-        pokemons.map(({id,name,img})) => (
-          <li key={id}> {name} </li>
-        ))
-      } */}
-      </ul>
     </>
   );
 };
