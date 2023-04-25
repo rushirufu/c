@@ -1,3 +1,3 @@
-React.FC<Props>;
+// React.FC<Props>;
 
-("use client");
+// ("use client");
