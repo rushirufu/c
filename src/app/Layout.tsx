@@ -1,3 +1,7 @@
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import "normalize.css/normalize.css";
+
 export default function RootLayout({
   // Layouts must accept a children prop.
   // This will be populated with nested layouts or pages
@@ -8,9 +12,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>WTF</title>
+        {/* <meta http-equiv="X-UA-Compatible" content="IE=edge" /> */}
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
+        <title>aa bb cc</title>
       </head>
       <body>{children}</body>
     </html>

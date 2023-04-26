@@ -1,7 +1,6 @@
 import useFetch from "@/hooks/usehooks-ts";
 import Image from "next/image";
 import { GetStaticProps, NextPage } from "next";
-import pokeApi from "../../api/Pokemons";
 import { PokemonSmall, PokemonsListResponse } from "@/interfaces/pokemon-list";
 import { Avatar, Card, Skeleton } from "antd";
 import {
@@ -11,6 +10,7 @@ import {
   SettingOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
+import pokeApi from "@/services/Pokemons";
 import { useState } from "react";
 
 const { Meta } = Card;
@@ -19,7 +19,7 @@ interface Props {
   pokemons: PokemonSmall[];
 }
 
-const index: NextPage<Props> = ({ pokemons }) => {
+const GetStaticProps: NextPage<Props> = ({ pokemons }) => {
   const [loading, setLoading] = useState(true);
 
   const onChange = (checked: boolean) => {
@@ -71,18 +71,7 @@ const index: NextPage<Props> = ({ pokemons }) => {
         <p>Card content</p>
         <p>Card content</p>
       </Card>
-      <Card actions={[<FacebookFilled style={{ color: "blue" }} />]}>
-        <p>NOMBRE pokomen</p>
-        <TwitterOutlined />
-        <Image
-          alt="pokemon name"
-          width={150}
-          height={150}
-          src={
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-          }
-        />
-      </Card>
+
       <h1>{pokemons[0].id}</h1>
       <h1>{pokemons[0].name}</h1>
       <h1>{pokemons[0].url}</h1>
@@ -118,4 +107,4 @@ export const getStaticProps: GetStaticProps = async (props: any) => {
   };
 };
 
-export default index;
+export default GetStaticProps;
