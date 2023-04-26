@@ -1,41 +1,114 @@
 import useFetch from "@/hooks/usehooks-ts";
-import Image from 'next/image'
+import Image from "next/image";
 import { GetStaticProps, NextPage } from "next";
 import pokeApi from "../../api/Pokemons";
 import { PokemonSmall, PokemonsListResponse } from "@/interfaces/pokemon-list";
+import { Avatar, Card, Skeleton } from "antd";
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  FacebookFilled,
+  SettingOutlined,
+  TwitterOutlined,
+} from "@ant-design/icons";
+import { useState } from "react";
+
+const { Meta } = Card;
 
 interface Props {
-  pokemons: PokemonSmall[]
+  pokemons: PokemonSmall[];
 }
 
 const index: NextPage<Props> = ({ pokemons }) => {
+  const [loading, setLoading] = useState(true);
+
+  const onChange = (checked: boolean) => {
+    setLoading(!checked);
+  };
   console.log(pokemons);
   return (
     <>
-    <h1>{pokemons[0].id}</h1>
-    <h1>{pokemons[0].name}</h1>
-    <h1>{pokemons[0].url}</h1>
-    <h1>{pokemons[0].img}</h1>
-    <ul>
-      {
-        pokemons.map(({id,name,img}) => (
+      <Card style={{ width: 300, marginTop: 16 }}>
+        <Meta
+          avatar={
+            <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
+          }
+          title="Card title"
+          description="This is the description"
+        />
+      </Card>
+      <Card
+        style={{ width: 300, marginTop: 16 }}
+        actions={[
+          <SettingOutlined key="setting" />,
+          <EditOutlined key="edit" />,
+          <EllipsisOutlined key="ellipsis" />,
+        ]}
+      >
+        <Skeleton loading={loading} avatar active>
+          <Meta
+            avatar={
+              <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+            }
+            title="Card title"
+            description="This is the description"
+          />
+        </Skeleton>
+      </Card>
+      <Card title="Card title" bordered={false} style={{ width: 300 }}>
+        <p>Card content</p>
+        <p>Card content</p>
+        <p>Card content</p>
+      </Card>
+
+      <Card
+        size="small"
+        title="Small size card"
+        extra={<a href="#">More</a>}
+        style={{ width: 300 }}
+      >
+        <p>Card content</p>
+        <p>Card content</p>
+        <p>Card content</p>
+      </Card>
+      <Card actions={[<FacebookFilled style={{ color: "blue" }} />]}>
+        <p>NOMBRE pokomen</p>
+        <TwitterOutlined />
+        <Image
+          alt="pokemon name"
+          width={150}
+          height={150}
+          src={
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
+          }
+        />
+      </Card>
+      <h1>{pokemons[0].id}</h1>
+      <h1>{pokemons[0].name}</h1>
+      <h1>{pokemons[0].url}</h1>
+      <h1>{pokemons[0].img}</h1>
+      <ul>
+        {pokemons.map(({ id, name, img }) => (
           <li key={id}>
             {name}
-          <img src={img} alt="pokemon" width={100} height={100}/>
+            <img src={img} alt="pokemon" width={100} height={100} />
           </li>
-        ))
-      }
-    </ul>
+        ))}
+      </ul>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (props: any) => {
-  const { data } = await pokeApi.get<PokemonsListResponse>("/pokemon?limit=151");
+  const { data } = await pokeApi.get<PokemonsListResponse>(
+    "/pokemon?limit=151"
+  );
   const result: PokemonSmall[] = data.results.map((pokemon, i) => ({
     ...pokemon,
-    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i + 1}.svg`,
-    id: i + 1
+    img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
+      i + 1
+    }.svg`,
+    id: i + 1,
   }));
 
   return {
