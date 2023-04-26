@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import {
   DesktopOutlined,
   FileOutlined,
+  HomeOutlined,
   PieChartOutlined,
+  SolutionOutlined,
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-
+// import { titleStyle } from "@/styles/A";
+import { jsx, css } from "@emotion/react";
 const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -28,8 +31,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
+  getItem("Inicio", "1", <HomeOutlined />),
+  getItem("Requerimientos", "2", <SolutionOutlined />),
   getItem("User", "sub1", <UserOutlined />, [
     getItem("Tom", "3"),
     getItem("Bill", "4"),
@@ -43,30 +46,40 @@ const items: MenuItem[] = [
 ];
 
 const App: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const titleStyle = css({
+    fontSize: "200px",
+    backgroundColor: "red",
+    fontStyle: "revert",
+  });
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", flexDirection: "row-reverse" }}>
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
+        <h5>arriba</h5>
+
         <div
           style={{
             height: 32,
             margin: 16,
-            background: "rgba(255, 255, 255, 0.2)",
+            background: "red",
           }}
         />
+        <h5>abajo</h5>
+
         <Menu
-          theme="dark"
+          theme="light"
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          style={{ border: "solid 3px green" }}
         />
       </Sider>
       <Layout className="site-layout">
@@ -80,10 +93,11 @@ const App: React.FC = () => {
             style={{
               padding: 24,
               minHeight: 360,
-              background: colorBgContainer,
+              background: "purple",
             }}
           >
-            Bill is a cat.
+            asdfasdfasdf
+            <h1 css={titleStyle}>ssss</h1>
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
